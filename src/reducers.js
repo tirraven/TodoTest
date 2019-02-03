@@ -41,7 +41,7 @@ function tasks(state = initialTasks, action) {
         else return task;
       });
 
-      return [...modifiedTasks, newTask(state)];
+      return [...modifiedTasks, newTask(state, action.desc)];
 
     case EDIT_TASK:
       return state.map(task => {
@@ -86,15 +86,15 @@ function tasks(state = initialTasks, action) {
   }
 }
 
-function newTask(tasks) {
+function newTask(tasks, desc) {
   let maxId = tasks
     .map(task => task.id)
     .reduce((prev, current) => (prev > current ? prev : current), 0);
   const newTask = {
     id: maxId + 1,
-    desc: "New Task",
+    desc: desc,
     mode: "edit",
-    inputDesc: "New Task",
+    inputDesc: desc,
     complete: false
   };
   return newTask;

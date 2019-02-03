@@ -6,42 +6,6 @@ import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 import { PropTypes } from "prop-types";
 
 class TaskList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  handleEditClick = id => {
-    this.props.onEditTask(id);
-  };
-
-  handleSaveClick = id => {
-    this.props.onSaveTask(id);
-  };
-
-  handleCancelClick = id => {
-    this.props.onCancelEdit(id);
-  };
-
-  handleAddClick = () => {
-    this.props.onCreateTask("New New");
-  };
-
-  handleDeleteClick = id => {
-    this.props.onDeleteTask(id);
-  };
-
-  handleDescChange = (id, inputDesc) => {
-    this.props.onEditDescChange(id, inputDesc);
-  };
-
-  handleToggleComplete = id => {
-    this.props.onToggleComplete(id);
-  };
-
-  handleSearchChange = searchValue => {
-    this.props.onSearchChange(searchValue);
-  };
-
   filterSearchTasks() {
     return this.props.tasks.filter(
       task =>
@@ -55,18 +19,36 @@ class TaskList extends React.Component {
       <div>
         <TaskSearchBox
           searchValue={this.props.searchValue}
-          onSearchChange={this.handleSearchChange}
+          onSearchChange={searchValue => {
+            this.props.onSearchChange(searchValue);
+          }}
         />
         <TaskListGroup
           tasks={this.filterSearchTasks()}
-          onDescChange={this.handleDescChange}
-          onToggleComplete={this.handleToggleComplete}
-          onEditClick={this.handleEditClick}
-          onSaveClick={this.handleSaveClick}
-          onCancelClick={this.handleCancelClick}
-          onDeleteClick={this.handleDeleteClick}
+          onDescChange={(id, inputDesc) => {
+            this.props.onEditDescChange(id, inputDesc);
+          }}
+          onToggleComplete={id => {
+            this.props.onToggleComplete(id);
+          }}
+          onEditClick={id => {
+            this.props.onEditTask(id);
+          }}
+          onSaveClick={id => {
+            this.props.onSaveTask(id);
+          }}
+          onCancelClick={id => {
+            this.props.onCancelEdit(id);
+          }}
+          onDeleteClick={id => {
+            this.props.onDeleteTask(id);
+          }}
         />
-        <NewTaskButton onAddClick={this.handleAddClick} />
+        <NewTaskButton
+          onAddClick={() => {
+            this.props.onCreateTask("New Task");
+          }}
+        />
       </div>
     );
   }
