@@ -96,16 +96,17 @@ class TaskList extends React.Component {
   };
 
   handleSearchChange = searchValue => {
+    debugger;
     this.props.onSearchChange(searchValue);
   };
 
-  // filterSearchTasks() {
-  //   return this.props.tasks.filter(
-  //     task =>
-  //       task.desc.toLowerCase().indexOf(this.props.searchValue.toLowerCase()) >
-  //       -1
-  //   );
-  // }
+  filterSearchTasks() {
+    return this.props.tasks.filter(
+      task =>
+        task.desc.toLowerCase().indexOf(this.props.searchValue.toLowerCase()) >
+        -1
+    );
+  }
 
   render() {
     return (
@@ -115,7 +116,7 @@ class TaskList extends React.Component {
           onSearchChange={this.handleSearchChange}
         />
         <TaskListGroup
-          tasks={this.props.tasks}
+          tasks={this.filterSearchTasks()}
           onDescChange={this.handleDescChange}
           onEditClick={this.handleEditClick}
           onSaveClick={this.handleSaveClick}
