@@ -5,6 +5,7 @@ export const DELETE_TASK = "DELETE_TASK";
 export const SEARCH_CHANGE = "SEARCH_CHANGE";
 export const CANCEL_EDIT_TASK = "CANCEL_EDIT_TASK";
 export const EDIT_DESC_CHANGE = "EDIT_DESC_CHANGE";
+export const TOGGLE_COMPLETE = "TOGGLE_COMPLETE";
 
 export function createTask(desc) {
   return {
@@ -25,6 +26,13 @@ export function editDescChange(taskId, desc) {
     type: EDIT_DESC_CHANGE,
     taskId,
     desc
+  };
+}
+
+export function toggleComplete(taskId) {
+  return {
+    type: TOGGLE_COMPLETE,
+    taskId
   };
 }
 

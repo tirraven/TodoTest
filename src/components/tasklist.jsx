@@ -8,95 +8,37 @@ import { PropTypes } from "prop-types";
 class TaskList extends React.Component {
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   tasks: [
-    //     { id: 1, desc: "First Task", mode: "view", inputDesc: "First Task" },
-    //     { id: 2, desc: "Second Task", mode: "view", inputDesc: "Second Task" }
-    //   ],
-    //   searchValue: ""
-    // };
   }
 
   handleEditClick = id => {
     this.props.onEditTask(id);
-    // this.cancelAllEdits();
-    // const { tasks } = this.state;
-    // const tasksCopy = [...tasks];
-    // const task = tasksCopy.filter(task => task.id === id)[0];
-    // task.mode = "edit";
-    // this.setState({ tasks: tasksCopy });
   };
-
-  // cancelAllEdits() {
-  //   const { tasks } = this.state;
-  //   const tasksCopy = [...tasks];
-  //   tasksCopy
-  //     .filter(task => task.mode !== "view")
-  //     .forEach(task => {
-  //       task.mode = "view";
-  //       task.inputDesc = task.desc;
-  //     });
-
-  //   this.setState({ tasks: tasksCopy });
-  // }
 
   handleSaveClick = id => {
     this.props.onSaveTask(id);
-    // const { tasks } = this.state;
-    // const tasksCopy = [...tasks];
-    // const task = tasksCopy.filter(task => task.id === id)[0];
-    // task.desc = task.inputDesc;
-    // task.mode = "view";
-    // this.setState({ tasks: tasksCopy });
   };
 
   handleCancelClick = id => {
     this.props.onCancelEdit(id);
-    // const { tasks } = this.state;
-    // const tasksCopy = [...tasks];
-    // const task = tasksCopy.filter(task => task.id === id)[0];
-    // task.inputDesc = task.desc;
-    // task.mode = "view";
-    // this.setState({ tasks: tasksCopy });
   };
 
   handleAddClick = () => {
     this.props.onCreateTask("New New");
-    //   this.cancelAllEdits();
-    //   const { tasks } = this.state;
-    //   const tasksCopy = [...tasks];
-    //   let maxId = tasksCopy
-    //     .map(task => task.id)
-    //     .reduce((prev, current) => (prev > current ? prev : current), 0);
-    //   const newTask = {
-    //     id: maxId + 1,
-    //     desc: "New Task",
-    //     mode: "edit",
-    //     inputDesc: "New Task"
-    //   };
-    //   tasksCopy.push(newTask);
-    //   this.setState({ tasks: tasksCopy });
   };
 
   handleDeleteClick = id => {
     this.props.onDeleteTask(id);
-    // const { tasks } = this.state;
-    // const tasksCopy = [...tasks].filter(task => task.id !== id);
-    // this.setState({ tasks: tasksCopy });
   };
 
   handleDescChange = (id, inputDesc) => {
     this.props.onEditDescChange(id, inputDesc);
-    // const { tasks } = this.state;
-    // const tasksCopy = [...tasks];
-    // const task = tasksCopy.filter(task => task.id === id)[0];
-    // task.inputDesc = inputDesc;
-    // this.setState({ tasks: tasksCopy });
+  };
+
+  handleToggleComplete = id => {
+    this.props.onToggleComplete(id);
   };
 
   handleSearchChange = searchValue => {
-    debugger;
     this.props.onSearchChange(searchValue);
   };
 
@@ -118,6 +60,7 @@ class TaskList extends React.Component {
         <TaskListGroup
           tasks={this.filterSearchTasks()}
           onDescChange={this.handleDescChange}
+          onToggleComplete={this.handleToggleComplete}
           onEditClick={this.handleEditClick}
           onSaveClick={this.handleSaveClick}
           onCancelClick={this.handleCancelClick}
@@ -133,6 +76,7 @@ function TaskListGroup(props) {
   const {
     tasks,
     onDescChange,
+    onToggleComplete,
     onEditClick,
     onSaveClick,
     onCancelClick,
@@ -145,6 +89,7 @@ function TaskListGroup(props) {
           <Task
             {...task}
             onDescChange={onDescChange}
+            onToggleComplete={onToggleComplete}
             onEditClick={onEditClick}
             onSaveClick={onSaveClick}
             onCancelClick={onCancelClick}
@@ -160,12 +105,14 @@ const taskPropType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   desc: PropTypes.string.isRequired,
   mode: PropTypes.string.isRequired,
-  inputDesc: PropTypes.string.isRequired
+  inputDesc: PropTypes.string.isRequired,
+  complete: PropTypes.bool.isRequired
 });
 
 TaskListGroup.propTypes = {
   tasks: PropTypes.arrayOf(taskPropType).isRequired,
   onDescChange: PropTypes.func.isRequired,
+  onToggleComplete: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
   onSaveClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,

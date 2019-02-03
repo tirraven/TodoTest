@@ -1,3 +1,8 @@
-.taskAcionButtonCol {
+/* .taskAcionButtonCol {
   width: 225px;
+} */
+
+.completeTask {
+  color: rgb(201, 201, 201);
+  text-decoration: line-through;
 }

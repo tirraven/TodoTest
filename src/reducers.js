@@ -5,13 +5,26 @@ import {
   SAVE_TASK,
   DELETE_TASK,
   SEARCH_CHANGE,
-  CANCEL_EDIT_TASK
+  CANCEL_EDIT_TASK,
+  TOGGLE_COMPLETE
 } from "./actions";
 import { combineReducers } from "redux";
 
 const initialTasks = [
-  { id: 1, desc: "First Task", mode: "view", inputDesc: "First Task" },
-  { id: 2, desc: "Second Task", mode: "view", inputDesc: "Second Task" }
+  {
+    id: 1,
+    desc: "First Task",
+    mode: "view",
+    inputDesc: "First Task",
+    complete: false
+  },
+  {
+    id: 2,
+    desc: "Second Task",
+    mode: "view",
+    inputDesc: "Second Task",
+    complete: false
+  }
 ];
 
 const taskAppReducer = combineReducers({
@@ -41,6 +54,13 @@ function tasks(state = initialTasks, action) {
       return state.map(task => {
         if (task.id === action.taskId)
           return { ...task, inputDesc: action.desc };
+        else return task;
+      });
+
+    case TOGGLE_COMPLETE:
+      return state.map(task => {
+        if (task.id === action.taskId)
+          return { ...task, complete: !task.complete };
         else return task;
       });
 
@@ -74,7 +94,8 @@ function newTask(tasks) {
     id: maxId + 1,
     desc: "New Task",
     mode: "edit",
-    inputDesc: "New Task"
+    inputDesc: "New Task",
+    complete: false
   };
   return newTask;
 }

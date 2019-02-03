@@ -4,6 +4,7 @@ import {
   createTask,
   editTask,
   editDescChange,
+  toggleComplete,
   saveTask,
   cancelEditTask,
   deleteTask,
@@ -33,6 +34,9 @@ const mapDispatchToProps = dispatch => {
     },
     onEditDescChange: (id, desc) => {
       dispatch(editDescChange(id, desc));
+    },
+    onToggleComplete: id => {
+      dispatch(toggleComplete(id));
     },
     onDeleteTask: id => {
       dispatch(deleteTask(id));

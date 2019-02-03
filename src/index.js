@@ -15,7 +15,7 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <h1>Task Manager</h1>
+        <h1>Just Another Todo List</h1>
         <h2>Add some tasks below</h2>
         <Container>
           <TaskListContainer />
