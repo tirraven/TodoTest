@@ -1,5 +1,3 @@
-const EDIT_TASK = "EDIT_TASK";
-
 const taskReducer = (state, action) => {
   if (typeof state === "undefined") {
   }

@@ -19,83 +19,79 @@ class TaskList extends React.Component {
   }
 
   handleEditClick = id => {
-    this.cancelAllEdits();
-
-    const { tasks } = this.state;
-    const tasksCopy = [...tasks];
-    const task = tasksCopy.filter(task => task.id === id)[0];
-    task.mode = "edit";
-
-    this.setState({ tasks: tasksCopy });
+    // this.cancelAllEdits();
+    // const { tasks } = this.state;
+    // const tasksCopy = [...tasks];
+    // const task = tasksCopy.filter(task => task.id === id)[0];
+    // task.mode = "edit";
+    // this.setState({ tasks: tasksCopy });
   };
 
-  cancelAllEdits() {
-    const { tasks } = this.state;
-    const tasksCopy = [...tasks];
-    tasksCopy
-      .filter(task => task.mode !== "view")
-      .forEach(task => {
-        task.mode = "view";
-        task.inputDesc = task.desc;
-      });
+  // cancelAllEdits() {
+  //   const { tasks } = this.state;
+  //   const tasksCopy = [...tasks];
+  //   tasksCopy
+  //     .filter(task => task.mode !== "view")
+  //     .forEach(task => {
+  //       task.mode = "view";
+  //       task.inputDesc = task.desc;
+  //     });
 
-    this.setState({ tasks: tasksCopy });
-  }
+  //   this.setState({ tasks: tasksCopy });
+  // }
 
   handleSaveClick = id => {
-    const { tasks } = this.state;
-    const tasksCopy = [...tasks];
-    const task = tasksCopy.filter(task => task.id === id)[0];
-    task.desc = task.inputDesc;
-    task.mode = "view";
-    this.setState({ tasks: tasksCopy });
+    // const { tasks } = this.state;
+    // const tasksCopy = [...tasks];
+    // const task = tasksCopy.filter(task => task.id === id)[0];
+    // task.desc = task.inputDesc;
+    // task.mode = "view";
+    // this.setState({ tasks: tasksCopy });
   };
 
   handleCancelClick = id => {
-    const { tasks } = this.state;
-    const tasksCopy = [...tasks];
-    const task = tasksCopy.filter(task => task.id === id)[0];
-    task.inputDesc = task.desc;
-    task.mode = "view";
-    this.setState({ tasks: tasksCopy });
+    // const { tasks } = this.state;
+    // const tasksCopy = [...tasks];
+    // const task = tasksCopy.filter(task => task.id === id)[0];
+    // task.inputDesc = task.desc;
+    // task.mode = "view";
+    // this.setState({ tasks: tasksCopy });
   };
 
   handleAddClick = () => {
-    this.cancelAllEdits();
-
-    const { tasks } = this.state;
-    const tasksCopy = [...tasks];
-    let maxId = tasksCopy
-      .map(task => task.id)
-      .reduce((prev, current) => (prev > current ? prev : current), 0);
-    const newTask = {
-      id: maxId + 1,
-      desc: "New Task",
-      mode: "edit",
-      inputDesc: "New Task"
-    };
-    tasksCopy.push(newTask);
-    this.setState({ tasks: tasksCopy });
+    //   this.cancelAllEdits();
+    //   const { tasks } = this.state;
+    //   const tasksCopy = [...tasks];
+    //   let maxId = tasksCopy
+    //     .map(task => task.id)
+    //     .reduce((prev, current) => (prev > current ? prev : current), 0);
+    //   const newTask = {
+    //     id: maxId + 1,
+    //     desc: "New Task",
+    //     mode: "edit",
+    //     inputDesc: "New Task"
+    //   };
+    //   tasksCopy.push(newTask);
+    //   this.setState({ tasks: tasksCopy });
   };
 
   handleDeleteClick = id => {
-    const { tasks } = this.state;
-    const tasksCopy = [...tasks].filter(task => task.id !== id);
-    this.setState({ tasks: tasksCopy });
+    // const { tasks } = this.state;
+    // const tasksCopy = [...tasks].filter(task => task.id !== id);
+    // this.setState({ tasks: tasksCopy });
   };
 
   handleDescChange = (id, inputDesc) => {
-    const { tasks } = this.state;
-    const tasksCopy = [...tasks];
-    const task = tasksCopy.filter(task => task.id === id)[0];
-    task.inputDesc = inputDesc;
-
-    this.setState({ tasks: tasksCopy });
+    // const { tasks } = this.state;
+    // const tasksCopy = [...tasks];
+    // const task = tasksCopy.filter(task => task.id === id)[0];
+    // task.inputDesc = inputDesc;
+    // this.setState({ tasks: tasksCopy });
   };
 
-  handleSearchChange = searchValue => {
-    this.setState({ searchValue });
-  };
+  // handleSearchChange = searchValue => {
+  //   this.setState({ searchValue });
+  // };
 
   filterSearchTasks() {
     return this.state.tasks.filter(
