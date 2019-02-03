@@ -9,16 +9,17 @@ class TaskList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      tasks: [
-        { id: 1, desc: "First Task", mode: "view", inputDesc: "First Task" },
-        { id: 2, desc: "Second Task", mode: "view", inputDesc: "Second Task" }
-      ],
-      searchValue: ""
-    };
+    // this.state = {
+    //   tasks: [
+    //     { id: 1, desc: "First Task", mode: "view", inputDesc: "First Task" },
+    //     { id: 2, desc: "Second Task", mode: "view", inputDesc: "Second Task" }
+    //   ],
+    //   searchValue: ""
+    // };
   }
 
   handleEditClick = id => {
+    this.props.onEditTask(id);
     // this.cancelAllEdits();
     // const { tasks } = this.state;
     // const tasksCopy = [...tasks];
@@ -41,6 +42,7 @@ class TaskList extends React.Component {
   // }
 
   handleSaveClick = id => {
+    this.props.onSaveTask(id);
     // const { tasks } = this.state;
     // const tasksCopy = [...tasks];
     // const task = tasksCopy.filter(task => task.id === id)[0];
@@ -50,6 +52,7 @@ class TaskList extends React.Component {
   };
 
   handleCancelClick = id => {
+    this.props.onCancelEdit(id);
     // const { tasks } = this.state;
     // const tasksCopy = [...tasks];
     // const task = tasksCopy.filter(task => task.id === id)[0];
@@ -59,6 +62,7 @@ class TaskList extends React.Component {
   };
 
   handleAddClick = () => {
+    this.props.onCreateTask("New New");
     //   this.cancelAllEdits();
     //   const { tasks } = this.state;
     //   const tasksCopy = [...tasks];
@@ -76,12 +80,14 @@ class TaskList extends React.Component {
   };
 
   handleDeleteClick = id => {
+    this.props.onDeleteTask(id);
     // const { tasks } = this.state;
     // const tasksCopy = [...tasks].filter(task => task.id !== id);
     // this.setState({ tasks: tasksCopy });
   };
 
   handleDescChange = (id, inputDesc) => {
+    this.props.onEditDescChange(id, inputDesc);
     // const { tasks } = this.state;
     // const tasksCopy = [...tasks];
     // const task = tasksCopy.filter(task => task.id === id)[0];
@@ -89,27 +95,27 @@ class TaskList extends React.Component {
     // this.setState({ tasks: tasksCopy });
   };
 
-  // handleSearchChange = searchValue => {
-  //   this.setState({ searchValue });
-  // };
+  handleSearchChange = searchValue => {
+    this.props.onSearchChange(searchValue);
+  };
 
-  filterSearchTasks() {
-    return this.state.tasks.filter(
-      task =>
-        task.desc.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) >
-        -1
-    );
-  }
+  // filterSearchTasks() {
+  //   return this.props.tasks.filter(
+  //     task =>
+  //       task.desc.toLowerCase().indexOf(this.props.searchValue.toLowerCase()) >
+  //       -1
+  //   );
+  // }
 
   render() {
     return (
       <div>
         <TaskSearchBox
-          searchValue={this.state.searchValue}
+          searchValue={this.props.searchValue}
           onSearchChange={this.handleSearchChange}
         />
         <TaskListGroup
-          tasks={this.filterSearchTasks()}
+          tasks={this.props.tasks}
           onDescChange={this.handleDescChange}
           onEditClick={this.handleEditClick}
           onSaveClick={this.handleSaveClick}

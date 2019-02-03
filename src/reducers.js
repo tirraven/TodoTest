@@ -14,7 +14,7 @@ const initialTasks = [
   { id: 2, desc: "Second Task", mode: "view", inputDesc: "Second Task" }
 ];
 
-const taskApp = combineReducers({
+const taskAppReducer = combineReducers({
   tasks,
   searchValue
 });
@@ -88,4 +88,4 @@ function searchValue(state = "", action) {
   }
 }
 
-export default taskApp;
+export default taskAppReducer;
